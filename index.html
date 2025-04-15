@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Discover the FakeReasoning, an accurate and interpretable AI-generated images detector.">
+  <meta property="og:title" content="FakeReasoning: Towards Generalizable Forgery Detection and Reasoning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FakeReasoning</title>
+
+  <!-- Fonts and Libraries -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to bottom, #ffffff, #ffffff);
+      color: #333;
+    }
+
+    .hero-header {
+      background: linear-gradient(135deg, #ffffff, #ffffff);
+      color: #000000;
+      padding: 3rem 1rem;
+      text-align: center;
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-weight: 700;
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .image-container:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s ease;
+    }
+
+    .image-container .alternate {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-container:active .alternate {
+      opacity: 1;
+    }
+
+    .image-container:active .original {
+      opacity: 0;
+    }
+
+    .citation-box {
+      background-color: #ffffff;
+      border-left: 4px solid #ffffff;
+      overflow-x: auto;
+    }
+
+    .custom-container {
+      max-width: 100%;
+      margin: auto;
+    }
+
+    .custom-container img {
+      width: auto;
+      height: 350px;
+      object-fit: contain;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-image: none;
+      width: 20px;
+      height: 20px;
+      border: solid black;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 5px;
+    }
+
+    .carousel-control-prev-icon {
+      transform: rotate(135deg);
+    }
+
+    .carousel-control-next-icon {
+      transform: rotate(-45deg);
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+      background-color: transparent;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+      opacity: 1;
+    }
+
+
+    .custom-width {
+      max-width: 60%;
+      margin: 0 auto;
+    }
+
+    .bullet-point {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    .bullet-point::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 1.5em;
+      line-height: 1;
+    }
+
+    .tab-container {
+      max-width: 60%;
+      margin: 2rem auto;
+      --primary-color: #2c3e50;
+      --active-color: #66829A;
+      --hover-color: #f0f4f8;
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 1rem;
+      border-bottom: 1px solid #eee;
+      justify-content: center;
+      padding-bottom: 0.5rem;
+    }
+
+    .tab-button {
+      background: none;
+      border: none;
+      padding: 12px 24px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+      border-radius: 6px 6px 0 0;
+      position: relative;
+    }
+
+    .tab-button:hover {
+      background: var(--hover-color);
+    }
+
+    .tab-button.active {
+      color: var(--active-color);
+    }
+
+    .tab-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--active-color);
+      animation: underline 0.3s ease;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 2rem;
+      background: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border-radius: 0 8px 8px 8px;
+      animation: fadeIn 0.3s ease;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .responsive-image {
+    max-width: 100%; 
+    height: 450px; 
+    display: block; 
+    margin: 0 auto;
+    }
+
+    @keyframes underline {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab-nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .tab-button {
+        font-size: 1rem;
+        padding: 10px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header Section -->
+  <section class="hero-header">
+    <div class="container">
+      <h1>FakeReasoning: Towards Generalizable Forgery Detection and Reasoning</h1>
+      <p data-aos-delay="200">
+        Achieving accurate and interpretable AI-generated images detection via VLMs' visual reasoning capability.
+      </p>
+      <!-- Buttons for Code, Dataset, Demo -->
+      <div class="d-flex justify-content-center mt-4" data-aos-delay="300">
+
+        <!-- Arxiv Button -->
+        <a href="https://arxiv.org/abs/2503.21210" target="_blank" class="btn btn-dark btn-lg mx-2">
+          <span class="icon">
+            <img src="static/images/arxiv-logo-one-color-white.svg" width="25" alt="ArXiv">
+          </span>
+          Paper
+        </a>
+        <!-- Code Button (coming soon) -->
+        <a href="#" target="_blank" class="btn btn-dark btn-lg mx-2" disabled>
+          <span class="icon">
+            <img src="static/images/gitt.png" width="25" alt="GitHub">
+          </span>
+          Code (coming soon)
+        </a>
+        <!-- Dataset Button (coming soon) -->
+        <a href="#" target="_blank" class="btn btn-dark btn-lg mx-2" disabled>
+          <span class="icon">
+            <img src="static/images/hf-logo-pirate.png" width="25" alt="Dataset">
+          </span>
+          Dataset (coming soon)
+        </a>
+
+        <!-- Demo Button (coming soon) -->
+        <!-- <a href="#" target="_blank" class="btn btn-dark btn-lg mx-2" disabled>
+          <span class="icon">
+            <img src="static/images/output.png" width="25" alt="Demo">
+          </span>
+          Demo (coming soon)
+        </a> -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract and Authors Section -->
+  <section class="py-5 text-center ">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="subtitle is-size-5">Authors</h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Yueying Gao<sup>1</sup>,</span>
+            <span class="author-block">Dongliang Chang<sup>2</sup>,</span>
+            <span class="author-block">Bingyao Yu<sup>2</sup>,</span>
+            <span class="author-block">Haotian Qin<sup>1</sup>,</span>
+            <span class="author-block">Lei Chen<sup>2</sup>,</span>
+            <span class="author-block">Kongming Liang<sup>1</sup>,</span>
+            <span class="author-block">Zhanyu Ma<sup>1</sup></span>
+          </div>
+        </div>
+        <div class="is-size-5 publication-authors">
+          <span class="author-block"><sup>1</sup> PRIS, Beijing University of Posts and Telecommunications</span><br>
+          <span class="author-block"><sup>2</sup> Tsinghua University</span><br>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 ">
+    <div class="container custom-width">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" style="text-align: center;">Contributions</h2>
+          <div class="content has-text-left">
+            <div class="bullet-point">
+              <strong>FakeReasoning:</strong> A forgery detection and reasoning framework, providing accurate detection
+              with structured and reliable reasoning on forgery attributes.
+            </div>
+            <div class="bullet-point">
+              <strong>MMFR-Dataset:</strong> A multi-modal forgery reasoning dataset, containing 100K training images
+              and 20K evaluation images annotated with detailed reasoning on forgery attributes.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visualization Section -->
+  <section class="py-5">
+    <div class="tab-container">
+      <h2 class="mb-4 text-center">Detection and Reasoning Performance of FakeReasoning</h2>
+      <p class="mb-4">
+        <strong>FakeReasoning</strong> conducts forgery reasoning task 
+        in structured stages (summary, caption, reasoning and conclusion) and hierarchical steps (low-level and high-level), 
+        leading to accurate and interpretable detection.
+      </p>
+      <div class="tab-nav">
+        <button class="tab-button active" onclick="switchTab(event, 'tab1')">GAN-generated image</button>
+        <button class="tab-button" onclick="switchTab(event, 'tab2')">DM-generated image</button>
+        <button class="tab-button" onclick="switchTab(event, 'tab3')">Real image I</button>
+        <button class="tab-button" onclick="switchTab(event, 'tab4')">Real image II</button>
+      </div>
+
+      <div id="tab1" class="tab-content active">
+        <img src="static/images/visualization_1.png" alt="GAN-generated image" style="max-width: 100%; height: auto;">
+      </object>
+      </div>
+
+      <div id="tab2" class="tab-content">
+        <img src="static/images/visualization_2.png" alt="DM-generated image" style="max-width: 100%; height: auto;">
+      </div>
+
+      <div id="tab3" class="tab-content">
+        <img src="static/images/visualization_3.png" alt="Real image I" style="max-width: 100%; height: auto;">
+      </div>
+
+      <div id="tab4" class="tab-content">
+        <img src="static/images/visualization_4.png" alt="Real image II" style="max-width: 100%; height: auto;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Training sets -->
+  <section class="py-5"> 
+    <div class="custom-container text-center">
+      <h2 class="mb-4" >MMFR-Dataset</h2>
+      <p class="mb-4">
+        Constructed with advanced GPT-4o, <strong>MMFR-Dataset</strong> contains over 100,000 images with over 
+        300,000 reasoning annotations as its training set. <br>
+        Here we illustrate several images and according annotations from reasoning stage.
+      </p>
+
+      <div id="mmfrCarousel" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img loading="lazy" src="static/images/train_1.jpg" class="responsive-image" alt="Image 1">
+          </div>
+          <div class="carousel-item">
+            <img loading="lazy" src="static/images/train_2.jpg" class="responsive-image" alt="Image 2">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mmfrCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mmfrCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evaluation sets -->
+  <section class="py-2 ">
+    <div class="custom-container text-center">
+      <p class="mb-4">
+        Evaluation sets include 20,000 images with over 60,000 reasoning annotations across 10 up-to-data generative models
+        and are balanced in terms of authenticity.<br>
+        Here we illustrate several real and fake images from each evaluation set.
+      </p>
+
+      <div id="mmfrEvaluationCarousel" class="carousel slide"  data-bs-interval="false">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <h4 class="text-center">DeepFloyd IF</h4>
+            <img loading="lazy" src="static/images/evaluation_1.png" class="responsive-image" alt="Evaluation Image 1">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">DALLE-3</h4>
+            <img loading="lazy" src="static/images/evaluation_2.png" class="responsive-image" alt="Evaluation Image 2">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">Stable Diffusion</h4>
+            <img loading="lazy" src="static/images/evaluation_3.png" class="responsive-image" alt="Evaluation Image 3">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">Guided</h4>
+            <img loading="lazy" src="static/images/evaluation_4.png" class="responsive-image" alt="Evaluation Image 4">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">GLIDE</h4>
+            <img loading="lazy" src="static/images/evaluation_5.png" class="responsive-image" alt="Evaluation Image 5">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">GigaGAN</h4>
+            <img loading="lazy" src="static/images/evaluation_6.png" class="responsive-image" alt="Evaluation Image 6">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">StyleGAN-XL</h4>
+            <img loading="lazy" src="static/images/evaluation_7.png" class="responsive-image" alt="Evaluation Image 7">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">StyleGAN2</h4>
+            <img loading="lazy" src="static/images/evaluation_8.png" class="responsive-image" alt="Evaluation Image 8">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">GauGAN</h4>
+            <img loading="lazy" src="static/images/evaluation_9.png" class="responsive-image" alt="Evaluation Image 9">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">BigGAN</h4>
+            <img loading="lazy" src="static/images/evaluation_10.png" class="responsive-image" alt="Evaluation Image 10">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mmfrEvaluationCarousel"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mmfrEvaluationCarousel"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Citation Section -->
+  <section class="py-5" style="background: #ffffff;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0" style="background: #ffffff;">
+            <div class="card-body p-4">
+              <h2 class="mb-2 text-center">Cite Our Work</h2>
+              <div class="citation-box p-4 rounded" style="background-color: #f8f9fa;">
+                <pre class="m-0" style="font-family: 'Roboto Mono', monospace; font-size: 0.9rem; color: #2d3748;">
+@article{gao2025fakereasoning,
+  title={FakeReasoning: Towards Generalizable Forgery Detection and Reasoning},
+  author={Gao, Yueying and Chang, Dongliang and Yu, Bingyao and Qin, Haotian and Chen, Lei and Liang, Kongming and Ma, Zhanyu},
+  journal={arXiv preprint arXiv:2503.21210},
+  year={2025},
+  url={https://arxiv.org/abs/2503.21210}
+}
+</pre>
+              </div>
+              <div class="text-center mt-4">
+                <button class="btn btn-light mx-2 copy-btn border" data-clipboard-target=".citation-box pre">
+                  <i class="bi bi-clipboard me-2"></i>Copy Citation
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="py-5 bg-dark text-light text-center">
+      <p>This page was built upon the Academic Project Page Template.<br>Licensed under a <a
+          href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" class="text-light">Creative Commons
+          Attribution-ShareAlike 4.0 License</a>.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <!-- Clipboard.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+  <script>
+    // Initialize clipboard
+    new ClipboardJS('.copy-btn');
+
+    // Add feedback when copied
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const originalText = this.innerHTML;
+        this.innerHTML = '<i class="bi bi-check-circle me-2"></i>Copied';
+        setTimeout(() => {
+          this.innerHTML = originalText;
+        }, 2000);
+      });
+    });
+  </script>
+
+  <script>
+    function switchTab(event, tabId) {
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+
+</body>
+
+</html>
