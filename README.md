@@ -1,6 +1,7 @@
 # ![fakereasoning](./static/images/fakereasoning.svg) FakeReasoning
 
-[![arXiv](https://img.shields.io/badge/arXiv-2503.21210-b31b1b.svg)](https://arxiv.org/abs/2503.21210)[![Project Page](https://img.shields.io/badge/Project-Page-green.svg)](https://pris-cv.github.io/FakeReasoning/)
+[![arXiv](https://img.shields.io/badge/arXiv-2503.21210-b31b1b.svg)](https://arxiv.org/abs/2503.21210)
+[![Project Page](https://img.shields.io/badge/Project-Page-green.svg)](https://pris-cv.github.io/FakeReasoning/)
 
 This is the source code for *FakeReasoning: Towards Generalizable Forgery Detection and Reasoning*. 
 
