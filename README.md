@@ -16,7 +16,7 @@ This is the source code for *FakeReasoning: Towards Generalizable Forgery Detect
 
 - [x] Release paper
 - [x] Release project page
-- [ ] Write environment setting
+- [ ] Release MMFR-Dataset
 - [ ] Release checkpoints and inference code
 
 ## Citation
