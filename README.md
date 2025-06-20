@@ -1,6 +1,6 @@
 # <img src="./static/images/fakereasoning.png" alt="fakereasoning" style="width: 5%;" /> FakeReasoning
 
-[<img src="https://img.shields.io/badge/arXiv-2503.21210-b31b1b.svg" alt="arXiv" style="zoom:150%;" />](https://arxiv.org/abs/2503.21210)[<img src="https://img.shields.io/badge/Project-Page-green.svg" alt="Project Page" style="zoom:150%;" />](https://pris-cv.github.io/FakeReasoning/)[<img src="https://img.shields.io/badge/Dataset-Page-orange.svg" alt="Dataset" style="zoom:150%;" />](https://huggingface.co/datasets/AnnaGao/MMFR-Dataset)
+[<img src="https://img.shields.io/badge/arXiv-2503.21210-b31b1b.svg" alt="arXiv" style="zoom:150%;" />](https://arxiv.org/abs/2503.21210)  [<img src="https://img.shields.io/badge/Project-Page-green.svg" alt="Project Page" style="zoom:150%;" />](https://pris-cv.github.io/FakeReasoning/)  [<img src="https://img.shields.io/badge/Dataset-Page-orange.svg" alt="Dataset" style="zoom:150%;" />](https://huggingface.co/datasets/AnnaGao/MMFR-Dataset)
 
 This is the source code for *FakeReasoning: Towards Generalizable Forgery Detection and Reasoning*. 
 
