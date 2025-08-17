@@ -264,9 +264,9 @@
   <!-- Header Section -->
   <section class="hero-header">
     <div class="container">
-      <h1>FakeReasoning: Towards Generalizable Forgery Detection and Reasoning</h1>
+      <h1>Towards Generalizable Forgery Detection and Reasoning</h1>
       <p data-aos-delay="200">
-        Achieving accurate and interpretable AI-generated images detection via VLMs' visual reasoning capability.
+        Achieving accurate and interpretable AI-generated images detection via MLLMs' visual reasoning capability.
       </p>
       <!-- Buttons for Code, Dataset, Demo -->
       <div class="d-flex justify-content-center mt-4" data-aos-delay="300">
@@ -313,9 +313,10 @@
           <h2 class="subtitle is-size-5">Authors</h2>
           <div class="is-size-5 publication-authors">
             <span class="author-block">Yueying Gao<sup>1</sup>,</span>
-            <span class="author-block">Dongliang Chang<sup>2</sup>,</span>
+            <span class="author-block">Dongliang Chang<sup>1</sup>,</span>
             <span class="author-block">Bingyao Yu<sup>2</sup>,</span>
             <span class="author-block">Haotian Qin<sup>1</sup>,</span>
+            <span class="author-block">Muxi Diao<sup>1</sup>,</span>
             <span class="author-block">Lei Chen<sup>2</sup>,</span>
             <span class="author-block">Kongming Liang<sup>1</sup>,</span>
             <span class="author-block">Zhanyu Ma<sup>1</sup></span>
@@ -337,11 +338,11 @@
           <div class="content has-text-left">
             <div class="bullet-point">
               <strong>FakeReasoning:</strong> A forgery detection and reasoning framework, providing accurate detection
-              with structured and reliable reasoning on forgery attributes.
+              with structured and reliable reasoning over forgery attributes.
             </div>
             <div class="bullet-point">
-              <strong>MMFR-Dataset:</strong> A multi-modal forgery reasoning dataset, containing 100K training images
-              and 20K evaluation images annotated with detailed reasoning on forgery attributes.
+              <strong>MMFR-Dataset:</strong> A multi-modal forgery reasoning dataset, containing 120K training images
+              and 20K evaluation images annotated with detailed reasoning over forgery attributes.
             </div>
           </div>
         </div>
@@ -390,7 +391,7 @@
       <h2 class="mb-4" >MMFR-Dataset</h2>
       <p class="mb-4">
         Constructed with advanced GPT-4o, <strong>MMFR-Dataset</strong> contains over 100,000 images with over 
-        300,000 reasoning annotations as its training set. <br>
+        310,000 reasoning annotations as its training set. <br>
         Here we illustrate several images and according annotations from reasoning stage.
       </p>
 
@@ -419,7 +420,7 @@
   <section class="py-2 ">
     <div class="custom-container text-center">
       <p class="mb-4">
-        Evaluation sets include 20,000 images with over 60,000 reasoning annotations across 10 up-to-data generative models
+        Evaluation sets include 20,000 images with over 66,000 reasoning annotations across 10 up-to-data generative models
         and are balanced in terms of authenticity.<br>
         Here we illustrate several real and fake images from each evaluation set.
       </p>
@@ -427,44 +428,44 @@
       <div id="mmfrEvaluationCarousel" class="carousel slide"  data-bs-interval="false">
         <div class="carousel-inner">
           <div class="carousel-item active">
+            <h4 class="text-center">GPT-4o</h4>
+            <img loading="lazy" src="static/images/GPT-4o.png" class="responsive-image" alt="Evaluation Image 1">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">FLUX</h4>
+            <img loading="lazy" src="static/images/FLUX.png" class="responsive-image" alt="Evaluation Image 2">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">PixArt-α</h4>
+            <img loading="lazy" src="static/images/PixArt-α.png" class="responsive-image" alt="Evaluation Image 3">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">Kandinsky</h4>
+            <img loading="lazy" src="static/images/Kandinsky.png" class="responsive-image" alt="Evaluation Image 4">
+          </div>
+          <div class="carousel-item">
+            <h4 class="text-center">Midjourney</h4>
+            <img loading="lazy" src="static/images/Midjourney.png" class="responsive-image" alt="Evaluation Image 5">
+          </div>
+          <div class="carousel-item">
             <h4 class="text-center">DeepFloyd IF</h4>
-            <img loading="lazy" src="static/images/evaluation_1.png" class="responsive-image" alt="Evaluation Image 1">
+            <img loading="lazy" src="static/images/DeepFloyd_IF.png" class="responsive-image" alt="Evaluation Image 6">
           </div>
           <div class="carousel-item">
             <h4 class="text-center">DALLE-3</h4>
-            <img loading="lazy" src="static/images/evaluation_2.png" class="responsive-image" alt="Evaluation Image 2">
+            <img loading="lazy" src="static/images/DALLE-3.png" class="responsive-image" alt="Evaluation Image 7">
           </div>
           <div class="carousel-item">
             <h4 class="text-center">Stable Diffusion</h4>
-            <img loading="lazy" src="static/images/evaluation_3.png" class="responsive-image" alt="Evaluation Image 3">
-          </div>
-          <div class="carousel-item">
-            <h4 class="text-center">Guided</h4>
-            <img loading="lazy" src="static/images/evaluation_4.png" class="responsive-image" alt="Evaluation Image 4">
-          </div>
-          <div class="carousel-item">
-            <h4 class="text-center">GLIDE</h4>
-            <img loading="lazy" src="static/images/evaluation_5.png" class="responsive-image" alt="Evaluation Image 5">
+            <img loading="lazy" src="static/images/Stable_Diffusion.png" class="responsive-image" alt="Evaluation Image 8">
           </div>
           <div class="carousel-item">
             <h4 class="text-center">GigaGAN</h4>
-            <img loading="lazy" src="static/images/evaluation_6.png" class="responsive-image" alt="Evaluation Image 6">
+            <img loading="lazy" src="static/images/GigaGAN.png" class="responsive-image" alt="Evaluation Image 9">
           </div>
           <div class="carousel-item">
             <h4 class="text-center">StyleGAN-XL</h4>
-            <img loading="lazy" src="static/images/evaluation_7.png" class="responsive-image" alt="Evaluation Image 7">
-          </div>
-          <div class="carousel-item">
-            <h4 class="text-center">StyleGAN2</h4>
-            <img loading="lazy" src="static/images/evaluation_8.png" class="responsive-image" alt="Evaluation Image 8">
-          </div>
-          <div class="carousel-item">
-            <h4 class="text-center">GauGAN</h4>
-            <img loading="lazy" src="static/images/evaluation_9.png" class="responsive-image" alt="Evaluation Image 9">
-          </div>
-          <div class="carousel-item">
-            <h4 class="text-center">BigGAN</h4>
-            <img loading="lazy" src="static/images/evaluation_10.png" class="responsive-image" alt="Evaluation Image 10">
+            <img loading="lazy" src="static/images/StyleGAN-XL.png" class="responsive-image" alt="Evaluation Image 10">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#mmfrEvaluationCarousel"
