@@ -1,6 +1,9 @@
 # <img src="./static/images/fakereasoning.png" alt="fakereasoning" style="width: 5%;" /> FakeReasoning
 
-[![](https://img.shields.io/badge/arXiv-2503.21210-b31b1b)](https://arxiv.org/abs/2503.21210)[![](https://img.shields.io/badge/Project-Page-green)](https://pris-cv.github.io/FakeReasoning/)[![](https://img.shields.io/badge/Dataset-Huggingface-orange)](https://huggingface.co/datasets/AnnaGao/MMFR-Dataset)[![](https://img.shields.io/badge/Model-Huggingface-orange)](https://huggingface.co/AnnaGao/FakeReasoning)
+[![](https://img.shields.io/badge/arXiv-2503.21210-b31b1b)](https://arxiv.org/abs/2503.21210)
+[![](https://img.shields.io/badge/Project-Page-green)](https://pris-cv.github.io/FakeReasoning/)
+[![](https://img.shields.io/badge/Dataset-Huggingface-orange)](https://huggingface.co/datasets/AnnaGao/MMFR-Dataset)
+[![](https://img.shields.io/badge/Model-Huggingface-orange)](https://huggingface.co/AnnaGao/FakeReasoning)
 
 This is the source code for *Towards Generalizable Forgery Detection and Reasoning*. In this paper,
 
@@ -10,7 +13,7 @@ This is the source code for *Towards Generalizable Forgery Detection and Reasoni
 
 ## News
 
-* **Aug 22 2025**: The [pretrained model](https://huggingface.co/AnnaGao/FakeReasoning) and source code are released. If you have followed our earlier work, please note that both the **dataset** and **method** have been updated. Check details on [arXiv](https://arxiv.org/abs/2503.21210).
+* **Aug 27 2025**: The [pretrained model](https://huggingface.co/AnnaGao/FakeReasoning) and source code are released. If you have followed our earlier work, please note that both the **dataset** and **method** have been updated. Check details on [arXiv](https://arxiv.org/abs/2503.21210).
 * **Jun 11 2025**: The [MMFR-Dataset](https://huggingface.co/datasets/AnnaGao/MMFR-Dataset) is released! Also we provide codes to follow our dataset construction pipeline. 
 * **Apr 15 2025**:  The [Project Page](https://pris-cv.github.io/FakeReasoning/) of our paper has been published! Click to find more about performance of FakeReasoning and samples in MMFR-Dataset.
 * **Mar 27 2025**:  [Our Paper](https://arxiv.org/abs/2503.21210) is released on arXiv.
