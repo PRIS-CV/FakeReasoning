@@ -1,11 +1,12 @@
 # <img src="./static/images/fakereasoning.png" alt="fakereasoning" style="width: 5%;" /> FakeReasoning
 
+[![Static Badge](https://img.shields.io/badge/Paper-IEEE%20TIP-blue)](https://ieeexplore.ieee.org/document/11456362)
 [![](https://img.shields.io/badge/arXiv-2503.21210-b31b1b)](https://arxiv.org/abs/2503.21210)
 [![](https://img.shields.io/badge/Project-Page-green)](https://pris-cv.github.io/FakeReasoning/)
 [![](https://img.shields.io/badge/Dataset-Huggingface-orange)](https://huggingface.co/datasets/AnnaGao/MMFR-Dataset)
 [![](https://img.shields.io/badge/Model-Huggingface-orange)](https://huggingface.co/AnnaGao/FakeReasoning)
 
-This is the source code for *Towards Generalizable Forgery Detection and Reasoning*. In this paper,
+This is the source code for *Toward Generalizable Forgery Detection and Reasoning*. In this paper,
 
 * We formulate detection and explanation as a unified Forgery Detection and Reasoning task (FDR-Task), leveraging Multi-Modal Large Language Models (MLLMs) to provide accurate detection through reliable reasoning over forgery attributes. 
 * We introduce the Multi-Modal Forgery Reasoning dataset (MMFR-Dataset), a large-scale dataset containing 120K images across 10 generative models, with 378K reasoning annotations on forgery attributes, enabling comprehensive evaluation of the FDR-Task. 
@@ -13,7 +14,7 @@ This is the source code for *Towards Generalizable Forgery Detection and Reasoni
 
 ## News
 
-* **Mar 9 2026**: Our paper is accepted to IEEE TIP!
+* **Mar 9 2026**: Our paper is accepted to [IEEE TIP](https://ieeexplore.ieee.org/document/11456362) !
 * **Aug 27 2025**: The [pretrained model](https://huggingface.co/AnnaGao/FakeReasoning) and source code are released. If you have followed our earlier work, please note that both the **dataset** and **method** have been updated. Check details on [arXiv](https://arxiv.org/abs/2503.21210).
 * **Jun 11 2025**: The [MMFR-Dataset](https://huggingface.co/datasets/AnnaGao/MMFR-Dataset) is released! Also we provide codes to follow our dataset construction pipeline. 
 * **Apr 15 2025**:  The [Project Page](https://pris-cv.github.io/FakeReasoning/) of our paper has been published! Click to find more about performance of FakeReasoning and samples in MMFR-Dataset.
@@ -167,12 +168,14 @@ per_device_train_batch_size × gradient_accumulation_steps × num_gpus = 128
 If you find this work useful for your research, please kindly cite our paper:
 
 ```latex
-@article{gao2025fakereasoning,
-  title={FakeReasoning: Towards Generalizable Forgery Detection and Reasoning},
-  author={Gao, Yueying and Chang, Dongliang and Yu, Bingyao and Qin, Haotian and Chen, Lei and Liang, Kongming and Ma, Zhanyu},
-  journal={arXiv preprint arXiv:2503.21210},
-  year={2025},
-  url={https://arxiv.org/abs/2503.21210}
+@article{gao2026toward,
+  title={Toward Generalizable Forgery Detection and Reasoning},
+  author={Gao, Yueying and Chang, Dongliang and Yu, Bingyao and Qin, Haotian and Diao, Muxi and Chen, Lei and Liang, Kongming and Ma, Zhanyu},
+  journal={IEEE Transactions on Image Processing},
+  volume={35},
+  pages={3395--3410},
+  year={2026},
+  publisher={IEEE}
 }
 ```
 
